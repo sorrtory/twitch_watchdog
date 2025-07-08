@@ -10,7 +10,7 @@ if __name__ == "__main__":
     watchDog = TwitchWatchDog()
 
     # TODO: This must be moved to watchDog logic
-    peer_id = 2000000000 + VK_WRITE_TO[0]
+    peer_id = 2000000000 + int(VK_WRITE_TO[0])
     was_live = False
 
     while True:
