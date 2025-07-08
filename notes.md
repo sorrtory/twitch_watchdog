@@ -1,6 +1,6 @@
 # Bots
 
-The goal is to text in vk as soon as twitch stream starts
+The goal is to send message on VK as soon as twitch stream starts
 
 ## VK
 
@@ -17,3 +17,5 @@ The goal is to text in vk as soon as twitch stream starts
 ## Twitch
 
 [Stack overflow oneshot](https://stackoverflow.com/questions/12064130/is-there-any-way-to-check-if-a-twitch-stream-is-live-using-python)
+
+[python TwitchAPI](https://pytwitchapi.dev/en/stable/)

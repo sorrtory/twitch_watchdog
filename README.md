@@ -1,11 +1,11 @@
-# I'm streaming
+# Bro's streaming
 
-Simple app that checks if user is alive on twitch and notify VK chat in that case.
+Simple app that checks if streamer is alive on twitch, in that case notify VK chat.
 
 ## Launch
 
 ```bash
-docker build -t vk-twitch-bot .
-docker run --env-file .env vk-twitch-bot
+cd src
+docker build -t twitch-watchdog-bot
+docker run --env-file ../.env twitch-watchdog-bot
 ```
-
