@@ -1,6 +1,6 @@
 import requests
 from twitchAPI.twitch import Twitch
-from .config import TWITCH_APP_ID, TWITCH_ACCESS_TOKEN, TWITCH_USER_LOGIN
+from src.config import TWITCH_APP_ID, TWITCH_ACCESS_TOKEN, TWITCH_USER_LOGIN
 import time
 
 # ! I can't get TOKEN, because I'm from Russia :(

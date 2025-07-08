@@ -1,6 +1,6 @@
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from .config import VK_TOKEN, VK_GROUP_ID
+from src.config import VK_TOKEN, VK_GROUP_ID
 
 # Note: Fucking joke, in the vk doc "group" can mean public (сообщество) and chat (беседа)
 # peer_id is used to identify them anyway (2000000000 + chat_id for chats)

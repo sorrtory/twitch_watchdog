@@ -1,6 +1,6 @@
-from .vk import VKBot
-from .twitch import TwitchWatchDog
-from .config import VK_WRITE_TO
+from src.vk import VKBot
+from src.twitch import TwitchWatchDog
+from src.config import VK_WRITE_TO
 from pprint import pprint
 import time
 
