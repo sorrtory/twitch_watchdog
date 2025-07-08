@@ -6,6 +6,6 @@ Simple app that checks if streamer is alive on twitch, in that case notify VK ch
 
 ```bash
 cd src
-docker build -t twitch-watchdog-bot
+docker build -t twitch-watchdog-bot .
 docker run --env-file ../.env twitch-watchdog-bot
 ```
