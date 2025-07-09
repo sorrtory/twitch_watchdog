@@ -10,7 +10,7 @@ class VKBot:
         self.vk_session = vk_api.VkApi(token=VK_TOKEN)
         self.longpoll = VkBotLongPoll(self.vk_session, VK_GROUP_ID)
 
-    def send_message(self, message, peer_id):
+    def send_message(self, message, peer_id) -> bool:
         """
         Send to the VK_GROUP_ID a message
         """
@@ -23,10 +23,12 @@ class VKBot:
                 "random_id": 0
             }
             self.vk_session.method("messages.send", params)
+            return True
         except vk_api.exceptions.ApiError as e:
             print(f"VK API error: {e}")
         except Exception as e:
             print(f"Error sending message: {e}")
+        return False
 
     def listen(self):
         """
