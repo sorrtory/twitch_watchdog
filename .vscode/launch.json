@@ -4,7 +4,8 @@
             "name": "Python Debugger: Module",
             "type": "debugpy",
             "request": "launch",
-            "module": "src.main",
+            "module": "watchdog",
+            "cwd": "${workspaceFolder}/src"
         }
     ]
 }

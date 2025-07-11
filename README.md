@@ -1,6 +1,6 @@
 # Bro's streaming
 
-Simple app that checks if streamer is alive on twitch, in that case notify VK chat.
+Simple app that checks if the streamer is live on Twitch and notifies the VK chat if so
 
 ## Launch
 

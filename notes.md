@@ -31,3 +31,10 @@ Set up bot
 [Stack overflow oneshot](https://stackoverflow.com/questions/12064130/is-there-any-way-to-check-if-a-twitch-stream-is-live-using-python)
 
 [python TwitchAPI](https://pytwitchapi.dev/en/stable/)
+
+## Python
+
+[Project structure](https://github.com/yngvem/python-project-structure)
+[Official guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+
+[pytest guide](https://youtu.be/EgpLj86ZHFQ?si=dMst_YxYQPO64Pmz)
