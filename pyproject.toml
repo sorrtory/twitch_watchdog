@@ -5,6 +5,22 @@ build-backend = "hatchling.build"
 [project]
 name = "watchdog"
 version = "0.0.1"
+dependencies = [
+    "vk_api",
+    "twitchAPI",
+    "requests",
+    "python-dotenv",
+    "beautifulsoup4",
+    "fastapi[standard]",
+    "pydantic",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pylint"
+]
 
 [tool.pytest.ini_options]
 pythonpath = "src"

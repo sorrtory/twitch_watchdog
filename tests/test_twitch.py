@@ -1,5 +1,4 @@
 from src.watchdog.core.twitch import TwitchWatchDog
-import pytest
 
 
 def test_is_stream_live():
@@ -24,6 +23,3 @@ def test_get_stream_title():
         .find("!fish !stats󠀀 !commands !triggerlist")
         != -1
     )
-
-
-

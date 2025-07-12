@@ -38,3 +38,6 @@ Set up bot
 [Official guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 [pytest guide](https://youtu.be/EgpLj86ZHFQ?si=dMst_YxYQPO64Pmz)
+
+
+[fast api base on poetry](https://medium.com/@arturocuicas/fastapi-base-project-bb4bbf322d23)

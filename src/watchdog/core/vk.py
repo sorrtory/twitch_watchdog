@@ -11,9 +11,9 @@ class VKBot:
     This class is used to interact with the VK API.
     """
 
-    def __init__(self):
-        self.vk_session = vk_api.VkApi(token=settings.vk_token)
-        self.longpoll = VkBotLongPoll(self.vk_session, settings.vk_group_id)
+    def __init__(self, token, group_id):
+        self.vk_session = vk_api.VkApi(token=token)
+        self.longpoll = VkBotLongPoll(self.vk_session, group_id)
 
     def send_message(self, message, peer_id) -> bool:
         """
@@ -37,7 +37,7 @@ class VKBot:
 
     def listen(self):
         """
-        Listen in cycle for new messages in the VK group and respond to them.
+        Listen in cycle for new messages in the VK group.
         """
 
         for event in self.longpoll.listen():
@@ -85,6 +85,7 @@ class VKBot:
     def get_chats(self):
         """
         Returns a list of chats where the bot is present.
+        Could return any conversation (private or group chat).
         """
         try:
             chats = self.vk_session.method(
