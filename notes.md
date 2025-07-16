@@ -34,10 +34,11 @@ Set up bot
 
 ## Python
 
-[Project structure](https://github.com/yngvem/python-project-structure)
-[Official guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+[Project structure github](https://github.com/yngvem/python-project-structure)
+[Official guide on packaging](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 [pytest guide](https://youtu.be/EgpLj86ZHFQ?si=dMst_YxYQPO64Pmz)
 
+[fast api based on poetry](https://medium.com/@arturocuicas/fastapi-base-project-bb4bbf322d23)
 
-[fast api base on poetry](https://medium.com/@arturocuicas/fastapi-base-project-bb4bbf322d23)
+[Real project structure (pyproject, Actions)](https://devsjc.github.io/blog/20240627-the-complete-guide-to-pyproject-toml/#background-why-do-we-need-pyproject)

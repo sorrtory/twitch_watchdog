@@ -1,3 +1,6 @@
+# Use poetry next time
+# https://devsjc.github.io/blog/20240627-the-complete-guide-to-pyproject-toml/#background-why-do-we-need-pyproject
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -15,11 +18,20 @@ dependencies = [
     "pydantic",
 ]
 
+[project.scripts]
+watchdog = "watchdog.__main__:main"
+
 [project.optional-dependencies]
 dev = [
+    "pylint",
+    "black",
+    "pre-commit",
+    "isort",
+]
+
+test = [
     "pytest",
     "pytest-cov",
-    "pylint"
 ]
 
 [tool.pytest.ini_options]

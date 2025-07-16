@@ -58,7 +58,7 @@ class TwitchWatchDogApi(TwitchWatchDogBase):
 class TwitchWatchDogHTML(TwitchWatchDogBase):
     """Twitch WatchDog using html parsing"""
 
-    def __init__(self, user_login : str):
+    def __init__(self, user_login: str):
         super().__init__(user_login)
         self.twitch_url = f"https://www.twitch.tv/{user_login}"
 
@@ -95,7 +95,7 @@ class TwitchWatchDogHTML(TwitchWatchDogBase):
 class TwitchWatchDog(TwitchWatchDogBase):
     """Twitch WatchDog using the best available method"""
 
-    def __init__(self, user_login : str):
+    def __init__(self, user_login: str):
         super().__init__(user_login)
         self.watchdog = TwitchWatchDogHTML(user_login)
 
