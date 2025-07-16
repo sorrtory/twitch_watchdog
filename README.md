@@ -22,4 +22,5 @@ github actions to launch them in the cloud
 pip install .
 pip install -e .[dev]
 pre-commit run --all-files # Formatter + Linter
+pre-commit install --install-hooks # Add .git/hooks
 ```
