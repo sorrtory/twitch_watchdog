@@ -1,7 +1,8 @@
 import time
 from abc import ABC, abstractmethod
-import requests
+
 import bs4
+import requests
 
 
 class TwitchWatchDogBase(ABC):
