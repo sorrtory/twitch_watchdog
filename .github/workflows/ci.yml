@@ -36,7 +36,8 @@ jobs:
           if [[ -n "$(git status --porcelain)" ]]; then
             git add .
             git commit -m "chore: apply pre-commit fixes"
-            git push
+            branch_name="${GITHUB_REF#refs/heads/}"
+            git push origin HEAD:$branch_name
             echo "Pre-commit hooks made changes and pushed them. Please review."
             exit 1
           fi
