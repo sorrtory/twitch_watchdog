@@ -1,5 +1,5 @@
-from datetime import datetime
 import signal
+from datetime import datetime
 
 from watchdog.config import settings
 from watchdog.core.vk import VKBot

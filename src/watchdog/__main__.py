@@ -10,12 +10,13 @@ Run the server ...
 # from watchdog.core.twitch import TwitchWatchDog
 # from watchdog.config import settings
 
+from datetime import datetime
+
 from fastapi import FastAPI
 
-from watchdog.server.api import router
-from watchdog.core.vk import VKBot
 from watchdog.config import settings
-from datetime import datetime
+from watchdog.core.vk import VKBot
+from watchdog.server.api import router
 
 # import uvicorn
 
@@ -25,7 +26,7 @@ from datetime import datetime
 #     Main function to run the FastAPI server.
 #     """
 
-    # uvicorn.run("watchdog.__main__:app", host="0.0.0.0", port=8000)
+# uvicorn.run("watchdog.__main__:app", host="0.0.0.0", port=8000)
 
 
 app = FastAPI()

@@ -68,6 +68,7 @@ class TwitchWatchDogHTML(TwitchWatchDogBase):
 
     curl the page, analyze the meta tags and their content.
     """
+
     # This is the number of requests to send to the Twitch page
     # The bigger the number, the more time every method will take
     REQUEST_NUMBER = 3
