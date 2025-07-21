@@ -20,6 +20,6 @@ repos:
       hooks:
           - id: pylint
             name: pylint
-            entry: .venv/bin/pylint
+            entry: pylint
             language: system
             types: [python]
