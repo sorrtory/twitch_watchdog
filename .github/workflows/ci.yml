@@ -40,7 +40,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
-      
+
       - name: Fail if pre-commit made changes
         if: steps.pre_commit.outcome != 'success'
         run: |
@@ -48,7 +48,7 @@ jobs:
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
           exit 1
-      
+
 
   test:
     name: Run tests

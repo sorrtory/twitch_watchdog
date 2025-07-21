@@ -12,6 +12,7 @@ Run the server ...
 
 
 from fastapi import FastAPI
+
 from watchdog.server.api import router
 
 # import uvicorn
