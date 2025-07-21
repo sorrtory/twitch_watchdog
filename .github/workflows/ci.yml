@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  pre-commit:
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    name: Run pre-commit hooks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pre-commit and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Run pre-commit on all files
+        id: pre_commit
+        run: pre-commit run --all-files
+        continue-on-error: true
+
+      - name: Pull request changes if any
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+      
+      - name: Fail if pre-commit made changes
+        if: steps.pre_commit.outcome != 'success'
+        run: |
+          echo "Pre-commit hooks made changes. Please commit them."
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          exit 1
+      
+
+  test:
+    name: Run tests
+    needs: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[test]
+      - name: Create .env file
+        run: |
+          echo "VK_TOKEN=${{ secrets.VK_TOKEN }}" > .env
+          echo "VK_GROUP_ID=${{ secrets.VK_GROUP_ID }}" >> .env
+          echo "VK_WRITE_TO=[2]" >> .env
+          echo "TWITCH_USER_LOGIN=${{ vars.TWITCH_USER_LOGIN }}" >> .env
+      - name: Run pytest
+        run: CI=1 pytest
