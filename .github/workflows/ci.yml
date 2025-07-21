@@ -38,6 +38,8 @@ jobs:
       - name: Pull request changes if any
         id: cpr
         uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
       
       - name: Fail if pre-commit made changes
         if: steps.pre_commit.outcome != 'success'
