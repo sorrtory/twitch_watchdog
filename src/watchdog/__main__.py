@@ -13,24 +13,27 @@ Run the server ...
 from fastapi import FastAPI
 
 from watchdog.server.api import router
+from watchdog.core.vk import VKBot
+from watchdog.config import settings
+from datetime import datetime
 
 # import uvicorn
 
 
-def main():
-    """
-    Main function to run the FastAPI server.
-    """
+# def main():
+#     """
+#     Main function to run the FastAPI server.
+#     """
 
     # uvicorn.run("watchdog.__main__:app", host="0.0.0.0", port=8000)
-    app = FastAPI()
-    app.include_router(router, prefix="/api", tags=["api"])
 
 
-if __name__ == "__main__":
-    main()
+app = FastAPI()
+app.include_router(router, prefix="/api", tags=["api"])
 
-#     watchDog = TwitchWatchDog("shylily")
+# main()
+
+# watchDog = TwitchWatchDog("shylily")
 
 # print(bot.get_chats())
 # TO!DO: This must be moved to watchDog logic # pylint: disable=fixme

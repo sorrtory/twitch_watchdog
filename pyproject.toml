@@ -16,6 +16,7 @@ dependencies = [
     "beautifulsoup4",
     "fastapi[standard]",
     "pydantic",
+    "pydantic_settings",
 ]
 
 [project.scripts]
@@ -32,6 +33,7 @@ dev = [
 test = [
     "pytest",
     "pytest-cov",
+    "pytest-env",
 ]
 
 [tool.pytest.ini_options]
