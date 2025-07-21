@@ -1,5 +1,6 @@
 import vk_api
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vk_api.bot_longpoll import VkBotEventType, VkBotLongPoll
+
 from watchdog.config import settings
 
 # Note: Fucking joke, in the vk doc "group" can mean public (сообщество) and chat (беседа)
@@ -11,9 +12,9 @@ class VKBot:
     This class is used to interact with the VK API.
     """
 
-    def __init__(self):
-        self.vk_session = vk_api.VkApi(token=settings.vk_token)
-        self.longpoll = VkBotLongPoll(self.vk_session, settings.vk_group_id)
+    def __init__(self, token, group_id):
+        self.vk_session = vk_api.VkApi(token=token)
+        self.longpoll = VkBotLongPoll(self.vk_session, group_id)
 
     def send_message(self, message, peer_id) -> bool:
         """
@@ -31,15 +32,15 @@ class VKBot:
             return True
         except vk_api.exceptions.ApiError as e:
             print(f"VK API error: {e}")
-        except Exception as e:
-            print(f"Error sending message: {e}")
+        except vk_api.exceptions.Captcha as e:
+            print(f"VK API captcha error: {e}")
         return False
 
     def listen(self):
         """
-        Listen in cycle for new messages in the VK group and respond to them.
+        Listen in cycle for new messages in the VK group.
         """
-
+        print("Listening for new messages...")
         for event in self.longpoll.listen():
             if event.type == VkBotEventType.MESSAGE_NEW:
                 if event.object.message is not None and "text" in event.object.message:
@@ -50,28 +51,9 @@ class VKBot:
                 ## self.send_message("Received your message!", event.object.message['peer_id'])
                 ## print(f"Sent response to {event.object.message}")
 
-    def check(self):
-        """
-        Check the messages in the VK group and respond to them.
-        """
-        try:
-            messages = self.vk_session.method(
-                "messages.getConversations", {"filter": "unread"}
-            )
-            for message in messages["items"]:
-                peer_id = message["conversation"]["peer"]["id"]
-                text = message["last_message"]["text"]
-                print(f"New message from {peer_id}: {text}")
-                # Example response logic
-                # self.send_message("Received your message!", peer_id)
-        except vk_api.exceptions.ApiError as e:
-            print(f"VK API error: {e}")
-        except Exception as e:
-            print(f"Error checking messages: {e}")
-
     def get_group_info(self):
         """
-        Returns information about VK public where the bot is originated.
+        Returns information about VK public where the bot originated from.
         """
         try:
             group_info = self.vk_session.method(
@@ -85,6 +67,7 @@ class VKBot:
     def get_chats(self):
         """
         Returns a list of chats where the bot is present.
+        Could return any conversation (private or group chat).
         """
         try:
             chats = self.vk_session.method(

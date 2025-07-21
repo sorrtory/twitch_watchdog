@@ -1,3 +1,6 @@
+# Use poetry next time
+# https://devsjc.github.io/blog/20240627-the-complete-guide-to-pyproject-toml/#background-why-do-we-need-pyproject
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -5,6 +8,33 @@ build-backend = "hatchling.build"
 [project]
 name = "watchdog"
 version = "0.0.1"
+dependencies = [
+    "vk_api",
+    "twitchAPI",
+    "requests",
+    "python-dotenv",
+    "beautifulsoup4",
+    "fastapi[standard]",
+    "pydantic",
+    "pydantic_settings",
+]
+
+[project.scripts]
+watchdog = "watchdog.__main__:main"
+
+[project.optional-dependencies]
+dev = [
+    "pylint",
+    "black",
+    "pre-commit",
+    "isort",
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-env",
+]
 
 [tool.pytest.ini_options]
 pythonpath = "src"

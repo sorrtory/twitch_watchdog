@@ -1,11 +1,34 @@
 {
     "configurations": [
         {
-            "name": "Python Debugger: Module",
+            "name": "Python Debugger: FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "watchdog.__main__:app",
+                "--reload"
+            ],
+            "env": {
+                "PYTHONPATH": "src"
+            },
+            "jinja": true
+        },
+        {
+            "name": "Python Debugger: Pytest",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "purpose": [
+                "debug-test"
+            ],
+        },
+        {
+            "name": "Python Debugger: Watchdog",
             "type": "debugpy",
             "request": "launch",
             "module": "watchdog",
             "cwd": "${workspaceFolder}/src"
-        }
+        },
     ]
 }
