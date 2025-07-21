@@ -10,6 +10,7 @@ jobs:
   pre-commit:
     permissions:
       contents: write
+      pull-requests: write
     name: Run pre-commit hooks
     runs-on: ubuntu-latest
     steps:
@@ -29,18 +30,22 @@ jobs:
           pip install -e .[dev]
 
       - name: Run pre-commit on all files
+        id: pre_commit
         run: pre-commit run --all-files
         continue-on-error: true
 
-      - name: Commit and push changes if any
-        id: auto-commit
-        uses: stefanzweifel/git-auto-commit-action@v6
-
-      - name: Fail if changes were committed
-        if: steps.auto-commit.outputs.changes_detected == 'true'
+      - name: Pull request changes if any
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+      
+      - name: Fail if pre-commit made changes
+        if: steps.pre_commit.outcome != 'success'
         run: |
-          echo "Pre-commit hooks made changes and committed them"
+          echo "Pre-commit hooks made changes. Please commit them."
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
           exit 1
+      
 
   test:
     name: Run tests
