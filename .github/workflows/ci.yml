@@ -1,8 +1,5 @@
 name: CI
 
-permissions:
-  contents: write
-  
 on:
   push:
     branches: ["main"]
@@ -11,12 +8,15 @@ on:
 
 jobs:
   pre-commit:
+    permissions:
+      contents: write
     name: Run pre-commit hooks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,18 +32,15 @@ jobs:
         run: pre-commit run --all-files
         continue-on-error: true
 
-      - name: Commit and push changes if any, then fail
+      - name: Commit and push changes if any
+        id: auto-commit
+        uses: stefanzweifel/git-auto-commit-action@v6
+
+      - name: Fail if changes were committed
+        if: steps.auto-commit.outputs.changes_detected == 'true'
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git add .
-            git commit -m "chore: apply pre-commit fixes"
-            branch_name="${GITHUB_REF#refs/heads/}"
-            git push origin HEAD:$branch_name
-            echo "Pre-commit hooks made changes and pushed them. Please review."
-            exit 1
-          fi
+          echo "Pre-commit hooks made changes and committed them"
+          exit 1
 
   test:
     name: Run tests
