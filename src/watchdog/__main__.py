@@ -10,12 +10,9 @@ Run the server ...
 # from watchdog.core.twitch import TwitchWatchDog
 # from watchdog.config import settings
 
-from datetime import datetime
 
 from fastapi import FastAPI
 
-from watchdog.config import settings
-from watchdog.core.vk import VKBot
 from watchdog.server.api import router
 
 # import uvicorn
