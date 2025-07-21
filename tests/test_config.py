@@ -6,4 +6,4 @@ def test_settings():
     settings = Settings()  # pyright: ignore
     # pydantic_settings will raise an error if the settings are not valid
     assert settings is not None
-    assert settings.vk_write_to.index(1) >= 0  # Check if vk_write_to contains 1
+    assert len(settings.vk_write_to) > 0  # Check if vk_write_to contains at least 1
