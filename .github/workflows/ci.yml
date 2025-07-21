@@ -27,6 +27,7 @@ jobs:
 
       - name: Run pre-commit on all files
         run: pre-commit run --all-files
+        continue-on-error: true
 
       - name: Commit and push changes if any, then fail
         run: |
