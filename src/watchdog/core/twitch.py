@@ -2,7 +2,10 @@ import time
 from abc import ABC, abstractmethod
 
 import bs4
-import requests
+import httpx
+import anyio
+
+# TODO: It is better to send requests concurrently instead of in cycle
 
 
 class TwitchWatchDogBase(ABC):
@@ -15,25 +18,25 @@ class TwitchWatchDogBase(ABC):
         self.user_login = user_login
 
     @abstractmethod
-    def is_stream_live(self) -> bool:
+    async def is_stream_live(self) -> bool:
         """
         Check if the stream is live.
         """
 
     @abstractmethod
-    def get_stream_info(self):
+    async def get_stream_info(self):
         """
         Get information about the current stream.
         """
 
     @abstractmethod
-    def get_description(self) -> str:
+    async def get_description(self) -> str:
         """
         Get the title of the current stream or channel description.
         """
 
     @abstractmethod
-    def exists(self) -> bool:
+    async def exists(self) -> bool:
         """
         Check if the Twitch user exists.
         """
@@ -76,20 +79,29 @@ class TwitchWatchDogHTML(TwitchWatchDogBase):
     def __init__(self, user_login: str):
         super().__init__(user_login)
         self.twitch_url = f"https://www.twitch.tv/{user_login}"
+        self.lock = anyio.Lock()
+        self.responses = {}
 
-    def get_soup(self) -> bs4.BeautifulSoup:
+    async def fetch(self, url: str):
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url)
+            if response.status_code != 200:
+                return None
+            async with self.lock:
+                self.responses[response.text] = self.responses.get(response.text, 0) + 1
+
+    async def get_soup(self) -> bs4.BeautifulSoup:
         """
         Get the BeautifulSoup object for the Twitch page.
         """
-
+        self.responses = {}
         # Send multiple requests to avoid network issues
         # and to ensure we get the most reliable response.
-        reqs = {}
-        for _ in range(TwitchWatchDogHTML.REQUEST_NUMBER):
-            time.sleep(1)
-            data = requests.get(self.twitch_url, timeout=10)
-            if data.status_code == 200:
-                reqs[data.content] = reqs.get(data.content, 0) + 1
+        # Run all requests concurrently
+        async with anyio.create_task_group() as tg:
+            for _ in range(self.REQUEST_NUMBER):
+                tg.start_soon(self.fetch, self.twitch_url)
+        reqs = self.responses
 
         # Get the most common response content
         content, _ = max(reqs.items(), key=lambda item: item[1])
@@ -102,15 +114,16 @@ class TwitchWatchDogHTML(TwitchWatchDogBase):
             raise ValueError("Failed to parse the Twitch page.")
         return soup
 
-    def is_stream_live(self) -> bool:
-        soup = self.get_soup()
+    async def is_stream_live(self) -> bool:
+        soup = await self.get_soup()
         return "isLiveBroadcast" in str(soup)
 
-    def get_stream_info(self):
+    async def get_stream_info(self):
         raise NotImplementedError("Stream info retrieval is not implemented yet.")
 
-    def get_description(self) -> str:
-        meta_tag = self.get_soup().find("meta", attrs={"name": "description"})
+    async def get_description(self) -> str:
+        soup = await self.get_soup()
+        meta_tag = soup.find("meta", attrs={"name": "description"})
         if (
             meta_tag is not None
             and isinstance(meta_tag, bs4.Tag)
@@ -120,11 +133,11 @@ class TwitchWatchDogHTML(TwitchWatchDogBase):
 
         return "Can't find stream title"
 
-    def exists(self) -> bool:
+    async def exists(self) -> bool:
         """
         Check if the Twitch user exists.
         """
-        soup = self.get_soup()
+        soup = await self.get_soup()
         return (
             soup.find("meta", attrs={"property": "og:title", "content": "Twitch"})
             is None
@@ -138,14 +151,14 @@ class TwitchWatchDog(TwitchWatchDogBase):
         super().__init__(user_login)
         self.watchdog = TwitchWatchDogHTML(user_login)
 
-    def is_stream_live(self):
-        return self.watchdog.is_stream_live()
+    async def is_stream_live(self):
+        return await self.watchdog.is_stream_live()
 
-    def get_stream_info(self):
-        return self.watchdog.get_stream_info()
+    async def get_stream_info(self):
+        return await self.watchdog.get_stream_info()
 
-    def get_description(self):
-        return self.watchdog.get_description()
+    async def get_description(self):
+        return await self.watchdog.get_description()
 
-    def exists(self):
-        return self.watchdog.exists()
+    async def exists(self):
+        return await self.watchdog.exists()

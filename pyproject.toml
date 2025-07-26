@@ -17,6 +17,9 @@ dependencies = [
     "fastapi[standard]",
     "pydantic",
     "pydantic_settings",
+    "anyio[trio]",
+    "httpx",
+    "uvicorn",
 ]
 
 [project.scripts]
