@@ -36,7 +36,7 @@ const Login: React.FC = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="border-secondaryColor focus:border-secondaryTextColor dark:border-secondaryColor-dark dark:focus:border-secondaryTextColor-dark w-full rounded border p-2 outline-none"
+              className="input-primary"
               required
             />
           </div>
@@ -49,13 +49,13 @@ const Login: React.FC = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border-secondaryColor focus:border-secondaryTextColor dark:border-secondaryColor-dark dark:focus:border-secondaryTextColor-dark w-full rounded border p-2 outline-none"
+              className="input-primary"
               required
             />
           </div>
           <button
             type="submit"
-            className="btn-primary w-2/3"
+            className="btn-primary w-2/3 cursor-pointer"
           >
             Login
           </button>

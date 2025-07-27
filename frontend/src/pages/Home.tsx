@@ -23,12 +23,14 @@ const Home: React.FC = () => {
   return (
     <section className="container flex flex-wrap items-center justify-center gap-3">
       <article className="card">
+        <h2>Twitch</h2>
+
         <div className="grid grid-cols-2 gap-2">
-          <p>Streamer:</p>
+          <p>Streamer</p>
           <span className="text-primaryTextColor dark:text-primaryTextColor-dark font-bold">
             merelley
           </span>
-          <p>Status:</p>
+          <p>Status</p>
           <span className="text-successColor font-bold">Online</span>
         </div>
         <hr className="border-mutedTextColor mt-2" />
@@ -53,13 +55,6 @@ const Home: React.FC = () => {
             <span className="ml-1 text-sm font-medium">Auto check</span>
           </label>
         </div>
-      </article>
-      <article className="card">
-        <h2 className="text-lg font-bold">Streamer Info</h2>
-        <p className="text-mutedTextColor mt-2">
-          This section will contain additional information about the streamer,
-          such as their bio, recent activity, and other relevant details.
-        </p>
       </article>
     </section>
   );

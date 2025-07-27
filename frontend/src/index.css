@@ -39,9 +39,17 @@
 }
 
 .toggle-primary {
-  @apply bg-secondaryColor/50 after:bg-primaryColor peer-checked:bg-secondaryColor peer-focus:ring-primaryColor dark:bg-secondaryColor-dark/50 dark:after:bg-primaryColor-dark dark:peer-checked:bg-secondaryColor-dark dark:peer-focus:ring-primaryColor-dark relative h-6 w-11 rounded-full peer-focus:ring-2 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:transition-transform peer-checked:after:translate-x-5;
+  @apply bg-secondaryColor/75 after:bg-primaryColor peer-checked:bg-secondaryColor peer-focus:ring-primaryColor dark:bg-secondaryColor-dark/75 dark:after:bg-primaryColor-dark dark:peer-checked:bg-secondaryColor-dark dark:peer-focus:ring-primaryColor-dark relative h-6 w-11 rounded-full peer-focus:ring-2 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:transition-transform peer-checked:after:translate-x-5;
+}
+
+.input-primary {
+  @apply border-secondaryColor focus:border-secondaryTextColor dark:border-secondaryColor-dark dark:focus:border-secondaryTextColor-dark w-full rounded border p-2 outline-none;
 }
 
 .card {
-  @apply border-borderColor dark:bg-primaryColor-dark w-fit rounded-lg border-1 p-5 shadow-md;
+  @apply border-borderColor dark:bg-primaryColor-dark w-fit rounded-lg border-1 p-5 pt-0 shadow-md;
+}
+
+.card > h2 {
+  @apply text-lg font-bold text-center my-4;
 }

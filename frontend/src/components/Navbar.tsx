@@ -9,14 +9,17 @@ function Navbar() {
             <NavbarLink path="/" label="Home" />
           </li>
           <li>
-            <NavbarLink path="/login" label="Login" />
+            <NavbarLink path="/bots" label="Bots" />
+          </li>
+          {/* <li>
+            <NavbarLink path="/login" label="Account" />
           </li>
           <li>
             <NavbarLink path="/nopage" label="Nopage" />
           </li>
           <li>
             <NavbarLink path="/about" label="About" />
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>
