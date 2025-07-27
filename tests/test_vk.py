@@ -70,6 +70,19 @@ def test_get_chat_info():
         assert chat_info["photo"] == "url"
 
 
+def test_get_chat_info2():
+    """Test getting chat info for first conversation."""
+    peer_id = 2000000000 + int(settings.vk_write_to[0])  # Convert group ID to peer_id
+    conv = VKBotConversation(settings.vk_token, settings.vk_group_id, peer_id)
+    chat_info = conv.get_chat_info()
+    print(f"Chat info: {chat_info}")
+    assert chat_info is not None
+    assert isinstance(chat_info, dict)
+    assert "title" in chat_info
+    assert "members_count" in chat_info
+    assert "photo" in chat_info
+    
+
 @pytest.mark.anyio
 async def test_get_chats():
     """
