@@ -33,15 +33,21 @@ async def send_message():
     """Send a message to a VK group."""
     # TODO: Implement peer_id and message as parameters
     for peer_id in settings.vk_write_to:
+        peer_id = 2000000000 + int(peer_id)  # Convert group ID
         conv = VKBotConversation(settings.vk_token, settings.vk_group_id, peer_id)
         conv.send_message("Hello from WatchDog!")
 
+@router.post("/change_message/", tags=["vk"])
+async def change_message():
+    """Change the message sent to a VK group."""
+    # settings TODO
 
 @router.get("/get_chats/", tags=["vk"])
 async def get_chats():
     """Get the list of chats. Send chat title, members count, and avatar."""
     chats = []
     for peer_id in settings.vk_write_to:
+        peer_id = 2000000000 + int(peer_id)  # Convert group ID
         conv = VKBotConversation(settings.vk_token, settings.vk_group_id, peer_id)
         chats.append(conv.get_chat_info())
     return {"chats": chats}
