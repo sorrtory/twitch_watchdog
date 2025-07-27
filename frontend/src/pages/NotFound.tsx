@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => (
-  <div className="flex flex-col items-center justify-cente">
+  <div className="flex flex-col items-center justify-center h-screen">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 36 36"
@@ -21,8 +21,8 @@ const NotFound: React.FC = () => (
     <Link
       to="/"
     >
-      Go back to 
-      <span className="font-bold text-blue-600"> /home</span>
+      Go back to
+      <span className="font-bold text-linkColor hover:text-linkHoverColor transition-colors duration-200"> /home</span>
     </Link>
   </div>
 );

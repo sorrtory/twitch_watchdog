@@ -22,3 +22,4 @@
 - [Tailwind](https://youtu.be/6biMWgD6_JY?si=zcTgy9pt-8Zyia25)
 - [Tailwind. Fireship](https://youtu.be/pfaSUYaSgRo?si=69gxGku6EbYQbg51)
 - [React Router template](https://github.com/remix-run/react-router-templates/tree/main/default)
+- [Dark mode tailwind](https://youtu.be/vIBKSmWAdIA?si=_FtO3EgMT9Hz8Yfb)

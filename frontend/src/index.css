@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+
+@theme {
+    --color-primaryColor: theme('colors.gray.700');
+    --color-primaryTextColor: theme('colors.white');
+    --color-secondaryColor: theme('colors.yellow.500');
+    --color-secondaryTextColor: theme('colors.gray.800');
+    --color-backgroundColor: theme('colors.gray.50');
+    --color-textColor: theme('colors.gray.900');
+    --color-linkColor: theme('colors.blue.600');
+    --color-linkHoverColor: theme('colors.rose.700');
+}
+
+
+:root {
+    @apply bg-backgroundColor text-textColor;
+}
