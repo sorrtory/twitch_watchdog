@@ -6,18 +6,13 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-200">
-      <header className="bg-blue-500 text-white p-4">
-        <h1 className="text-2xl">My Application</h1>
-        <Navbar />
-      </header>
-
+    <div className="min-h-screen grid">
       <main>
         <Routes>
           <Route
             path="/"
             element={
-              <div className="text-3xl font-bold underline">Hello world!</div>
+              <Navbar />
             }
           />
           <Route

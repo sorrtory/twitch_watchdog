@@ -2,31 +2,26 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto">
-        <h1 className="text-white text-2xl">Twitch Watchdog</h1>
-        <ul className="flex space-x-4">
-          <li>
-            <Link to="/" className="text-white">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="text-white">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className="text-white">
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link to="/login" className="text-white">
-              Login
-            </Link>
-          </li>
-        </ul>
+    <nav className="bg-primaryColor p-5 pb-0 shadow-md rounded-2xl mx-2 md:mx-10 mt-2">
+      <div className="container mx-auto text-primaryTextColor">
+      <h1 className="text-2xl mb-3">Twitch Watchdog</h1>
+      <ul className="flex space-x-5 p-1">
+        <li>
+        <Link to="/" className="border-secondaryColor border-b-2 hover:border-primaryTextColor transition-colors">
+          Home
+        </Link>
+        </li>
+        <li>
+        <Link to="/login" className="">
+          Login
+        </Link>
+        </li>
+        <li>
+        <Link to="/nopage" className="">
+          Nopage
+        </Link>
+        </li>
+      </ul>
       </div>
     </nav>
   );
