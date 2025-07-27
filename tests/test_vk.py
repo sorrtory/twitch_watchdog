@@ -1,10 +1,11 @@
 import signal
 from datetime import datetime
+from unittest.mock import patch
+
+import pytest
 
 from watchdog.config import settings
 from watchdog.core.vk import ConversationExplorer, VKBot, VKBotConversation
-from unittest.mock import patch
-import pytest
 
 
 def timeout_handler(signum, frame):
@@ -44,7 +45,6 @@ def test_write_to_is_ok():
         conv = VKBotConversation(settings.vk_token, settings.vk_group_id, peer_id)
         assert conv.does_conversation_exist(), True
         assert conv.is_conversation_writable(), True
-
 
 
 def test_get_chat_info():

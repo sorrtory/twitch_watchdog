@@ -1,6 +1,8 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch, MagicMock
+
 from watchdog.server.api import router
 
 # filepath: /home/chinalap/Documents/twitch_watchdog/tests/test_api.py

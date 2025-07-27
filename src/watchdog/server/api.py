@@ -3,8 +3,9 @@
 # for now
 
 from fastapi import APIRouter
-from watchdog.core.twitch import TwitchWatchDog
+
 from watchdog.config import settings
+from watchdog.core.twitch import TwitchWatchDog
 from watchdog.core.vk import VKBotConversation
 
 router = APIRouter()

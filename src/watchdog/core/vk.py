@@ -1,8 +1,9 @@
 from collections.abc import Iterable
-from anyio import sleep
-import vk_api
-from vk_api.bot_longpoll import VkBotEventType, VkBotLongPoll
 from typing import AsyncGenerator
+
+import vk_api
+from anyio import sleep
+from vk_api.bot_longpoll import VkBotEventType, VkBotLongPoll
 
 from watchdog.config import settings
 

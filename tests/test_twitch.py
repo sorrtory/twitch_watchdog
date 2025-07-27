@@ -1,5 +1,6 @@
-from src.watchdog.core.twitch import TwitchWatchDog
 import pytest
+
+from src.watchdog.core.twitch import TwitchWatchDog
 
 DEFINITELY_OFFLINE = "test_user"
 DEFINITELY_ONLINE = "asmr_marie"
@@ -19,12 +20,13 @@ async def test_is_stream_live():
 @pytest.mark.anyio
 async def test_get_stream_title():
     """Test if the Twitch stream title is retrieved correctly."""
-    assert await TwitchWatchDog(DEFINITELY_OFFLINE).get_description() == "my own new channel"
     assert (
-        (await TwitchWatchDog(DEFINITELY_ONLINE)
-        .get_description()).find("!fish !stats󠀀 !commands !triggerlist")
-        != -1
+        await TwitchWatchDog(DEFINITELY_OFFLINE).get_description()
+        == "my own new channel"
     )
+    assert (await TwitchWatchDog(DEFINITELY_ONLINE).get_description()).find(
+        "!fish !stats󠀀 !commands !triggerlist"
+    ) != -1
     assert (
         await TwitchWatchDog(DEFINITELY_NOT_EXIST).get_description()
         == "Can't find stream title"

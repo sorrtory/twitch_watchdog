@@ -10,11 +10,11 @@ Run the server ...
 # from watchdog.core.twitch import TwitchWatchDog
 # from watchdog.config import settings
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from watchdog.server.api import router
-import uvicorn
 
+from watchdog.server.api import router
 
 app = FastAPI()
 app.include_router(router, prefix="/api", tags=["api"])

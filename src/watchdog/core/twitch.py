@@ -1,9 +1,9 @@
 import time
 from abc import ABC, abstractmethod
 
+import anyio
 import bs4
 import httpx
-import anyio
 
 # TODO: It is better to send requests concurrently instead of in cycle
 
