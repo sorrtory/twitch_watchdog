@@ -23,4 +23,6 @@ pip install .
 pip install -e .[dev]
 pre-commit run --all-files # Formatter + Linter
 pre-commit install --install-hooks # Add .git/hooks
+
+npm --prefix=frontend run pretty # Frontend formatter
 ```

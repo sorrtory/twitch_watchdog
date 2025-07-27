@@ -18,11 +18,12 @@ const NotFound: React.FC = () => (
       ></path>
     </svg>
     <h1 className="text-2xl font-bold">Nothing here</h1>
-    <Link
-      to="/"
-    >
+    <Link to="/">
       Go back to
-      <span className="font-bold text-linkColor hover:text-linkHoverColor transition-colors duration-200"> /home</span>
+      <span className="font-bold text-linkColor hover:text-linkHoverColor transition-colors duration-200">
+        {" "}
+        /home
+      </span>
     </Link>
   </div>
 );

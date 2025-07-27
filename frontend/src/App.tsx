@@ -9,12 +9,7 @@ function App() {
     <div className="min-h-screen grid">
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Navbar />
-            }
-          />
+          <Route path="/" element={<Navbar />} />
           <Route
             path="/about"
             element={
