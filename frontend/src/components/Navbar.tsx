@@ -1,28 +1,21 @@
-import { Link } from "react-router-dom";
-
+import NavbarLink from "./NavbarLink";
 function Navbar() {
   return (
-    <nav className="bg-primaryColor p-5 pb-0 shadow-md rounded-2xl mx-2 md:mx-10 mt-2">
-      <div className="container mx-auto text-primaryTextColor">
-        <h1 className="text-2xl mb-3">Twitch Watchdog</h1>
-        <ul className="flex space-x-5 p-1">
+    <nav className="bg-primaryColor dark:bg-primaryColor-dark mt-2 mb-5 flex rounded-2xl px-5 py-4 shadow-md">
+      <div className="container mx-auto">
+        <h1 className="mb-3 text-2xl">Twitch Watchdog</h1>
+        <ul className="flex space-x-5 border-t-1 p-1">
           <li>
-            <Link
-              to="/"
-              className="border-secondaryColor border-b-2 hover:border-primaryTextColor transition-colors"
-            >
-              Home
-            </Link>
+            <NavbarLink path="/" label="Home" />
           </li>
           <li>
-            <Link to="/login" className="">
-              Login
-            </Link>
+            <NavbarLink path="/login" label="Login" />
           </li>
           <li>
-            <Link to="/nopage" className="">
-              Nopage
-            </Link>
+            <NavbarLink path="/nopage" label="Nopage" />
+          </li>
+          <li>
+            <NavbarLink path="/about" label="About" />
           </li>
         </ul>
       </div>

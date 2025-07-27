@@ -3,17 +3,26 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="min-h-screen grid">
+    <div className="grid min-h-screen">
       <main>
         <Routes>
-          <Route path="/" element={<Navbar />} />
+          <Route path="/" element={
+            <div className="container mx-auto px-5">
+              <Navbar />
+              <Home />
+            </div>
+          } />
           <Route
             path="/about"
             element={
-              <div className="text-3xl font-bold underline">About page</div>
+              <>
+                <Navbar />
+                <div className="text-3xl font-bold underline">About page</div>
+              </>
             }
           />
           <Route

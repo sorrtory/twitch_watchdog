@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NotFound: React.FC = () => (
-  <div className="flex flex-col items-center justify-center h-screen">
+  <div className="flex h-screen flex-col items-center justify-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 36 36"
-      className="w-50 h-50"
+      className="h-50 w-50"
     >
       <path
         fill="#B5B5BF"
@@ -20,7 +20,7 @@ const NotFound: React.FC = () => (
     <h1 className="text-2xl font-bold">Nothing here</h1>
     <Link to="/">
       Go back to
-      <span className="font-bold text-linkColor hover:text-linkHoverColor transition-colors duration-200">
+      <span className="text-linkColor hover:text-linkHoverColor font-bold transition-colors duration-200">
         {" "}
         /home
       </span>

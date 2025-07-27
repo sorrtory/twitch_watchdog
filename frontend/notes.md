@@ -11,7 +11,7 @@
 
 - npm install tailwindcss @tailwindcss/vite
 - npm install react-router-dom
-- npm install -D prettier
+- npm install -D prettier prettier-plugin-tailwindcss
 
 ## Useful links
 

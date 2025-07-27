@@ -1,16 +1,47 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primaryColor: theme("colors.gray.700");
-  --color-primaryTextColor: theme("colors.white");
-  --color-secondaryColor: theme("colors.yellow.500");
-  --color-secondaryTextColor: theme("colors.gray.800");
+  /* Light Theme */
+  --color-primaryColor: theme("colors.white");
+  --color-primaryTextColor: theme("colors.gray.900");
+
+  --color-secondaryColor: theme("colors.gray.300");
+  --color-secondaryTextColor: theme("colors.gray.600");
+
   --color-backgroundColor: theme("colors.gray.50");
   --color-textColor: theme("colors.gray.900");
+
+  /* Dark Theme */
+  --color-primaryColor-dark: theme("colors.gray.900");
+  --color-primaryTextColor-dark: theme("colors.yellow.100");
+
+  --color-secondaryColor-dark: theme("colors.gray.800");
+  --color-secondaryTextColor-dark: theme("colors.yellow.500");
+
+  --color-backgroundColor-dark: theme("colors.gray.950");
+  --color-textColor-dark: theme("colors.white");
+
+  /* Common */
+  --color-borderColor: theme("colors.gray.200");
+  --color-mutedTextColor: theme("colors.gray.500");
+  --color-errorColor: theme("colors.red.500");
+  --color-successColor: theme("colors.green.500");
   --color-linkColor: theme("colors.blue.600");
   --color-linkHoverColor: theme("colors.rose.700");
 }
 
 :root {
-  @apply bg-backgroundColor text-textColor;
+  @apply bg-backgroundColor text-textColor dark:bg-backgroundColor-dark dark:text-textColor-dark;
+}
+
+.btn-primary {
+  @apply bg-secondaryColor text-primaryTextColor hover:text-secondaryTextColor  dark:bg-secondaryColor-dark dark:text-primaryTextColor-dark dark:hover:text-secondaryTextColor-dark rounded px-4 py-2 transition duration-100 active:scale-95;
+}
+
+.toggle-primary {
+  @apply bg-secondaryColor/50 after:bg-primaryColor peer-checked:bg-secondaryColor peer-focus:ring-primaryColor dark:bg-secondaryColor-dark/50 dark:after:bg-primaryColor-dark dark:peer-checked:bg-secondaryColor-dark dark:peer-focus:ring-primaryColor-dark relative h-6 w-11 rounded-full peer-focus:ring-2 after:absolute after:top-0.5 after:left-0.5 after:h-5 after:w-5 after:rounded-full after:transition-transform peer-checked:after:translate-x-5;
+}
+
+.card {
+  @apply border-borderColor dark:bg-primaryColor-dark w-fit rounded-lg border-1 p-5 shadow-md;
 }
