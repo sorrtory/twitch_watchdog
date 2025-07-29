@@ -7,23 +7,26 @@ from fastapi import APIRouter
 from watchdog.config import settings
 from watchdog.core.twitch import TwitchWatchDog
 from watchdog.core.vk import VKBotConversation
+import time
 
 router = APIRouter()
 
-
 ### Twitch API Endpoints ###
-@router.get("/is_alive/", tags=["stream"])
-async def is_stream_alive():
+@router.get("/get_stream_status/", tags=["twitch"])
+async def get_stream_status():
     """Check if the stream is alive."""
     watchdog = TwitchWatchDog(settings.twitch_user_login)
-    return {"is_alive": watchdog.is_stream_live()}
+    return {
+        "is_alive": await watchdog.is_stream_live(),
+        "title": await watchdog.get_description(),
+        "last_check": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
+    }
 
-
-@router.get("/get_stream_title/", tags=["stream"])
-async def get_stream_title():
-    """Get the title of the current stream."""
-    watchdog = TwitchWatchDog(settings.twitch_user_login)
-    return {"title": watchdog.get_description()}
+@router.post("/watching/", tags=["twitch"])
+async def print_post_payload(payload: dict):
+    """Print the POST payload received."""
+    print("Received POST payload:", payload)
+    return {"received": payload}
 
 
 ### VK API Endpoints ###

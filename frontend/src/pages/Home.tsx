@@ -1,15 +1,32 @@
 import React from "react";
+import { useEffect, useState } from "react";
+import api from "../api";
 
 const Home: React.FC = () => {
-  const handleRequest = () => {
-    // Handle request logic here
-    console.log("Request sent");
+  const [status, setStatus] = useState("Loading...");
+  const [lastCheck, setLastCheck] = useState("Loading...");
+
+  const fetchStreamStatus = async () => {
+    setStatus("Loading...");
+    setLastCheck("Loading...");
+    api
+      .get("/get_stream_status/")
+      .then((response) => {
+        setStatus(response.data.is_alive ? "Online" : "Offline");
+        setLastCheck(response.data.last_check);
+      })
+      .catch((error) => {
+        console.error("Error fetching Twitch status:", error);
+      });
   };
+
+  useEffect(() => {
+    fetchStreamStatus();
+  }, []);
+
   const handleAutoRequestToggle = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    // Handle auto request toggle logic here
-    console.log("Auto request toggled:", event.target.checked);
     const checkButton = document.getElementById(
       "check-button",
     ) as HTMLButtonElement | null;
@@ -19,6 +36,14 @@ const Home: React.FC = () => {
       checkButton.classList.toggle("cursor-not-allowed", event.target.checked);
       checkButton.classList.toggle("cursor-pointer", !event.target.checked);
     }
+
+    if (event.target.checked) {
+      const intervalId = setInterval(() => {
+        fetchStreamStatus();
+      }, 5000);
+      return () => clearInterval(intervalId);
+    }
+    
   };
   return (
     <section className="container flex flex-wrap items-center justify-center gap-3">
@@ -31,16 +56,23 @@ const Home: React.FC = () => {
             merelley
           </span>
           <p>Status</p>
-          <span className="text-successColor font-bold">Online</span>
+          <span
+            className={` ${status === "Online" ? "text-successColor" : "text-errorColor"} font-bold`}
+          >
+            {status}
+          </span>
         </div>
         <hr className="border-mutedTextColor mt-2" />
-        <div className="mt-5">
-          <p className="text-mutedTextColor">Last check: 2023-10-01 12:00:00</p>
+        <div className="mt-5 text-mutedTextColor">
+          <p className="flex justify-around items-center gap-2">
+            <span>Last check:</span>
+            <span className="font-bold">{lastCheck}</span>
+          </p>
         </div>
         <div className="mt-2 flex items-center space-x-3">
           <button
             className="btn-primary cursor-pointer"
-            onClick={handleRequest}
+            onClick={fetchStreamStatus}
             id="check-button"
           >
             Check
