@@ -1,0 +1,22 @@
+@startuml Follow_Streamer
+
+actor User
+collections SocialMediaPlatforms
+participant Frontend
+participant Api
+database Database
+
+group Direct streamer's bot
+    User -> SocialMediaPlatforms : Add streamer's own bot to the chat
+    SocialMediaPlatforms -> User : Notify about new stream
+end
+
+group Common bot
+    User -> SocialMediaPlatforms : Add WatchDog bot to the chat
+    User -> Frontend : Register chat ID and preferred platforms
+    User -> Frontend : Subscribe to streamers
+    Frontend -> Api : Send request to follow a streamer
+    Api <-> Database : Update user preferences
+end
+
+@enduml

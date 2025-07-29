@@ -42,3 +42,7 @@ Set up bot
 [fast api based on poetry](https://medium.com/@arturocuicas/fastapi-base-project-bb4bbf322d23)
 
 [Real project structure (pyproject, Actions)](https://devsjc.github.io/blog/20240627-the-complete-guide-to-pyproject-toml/#background-why-do-we-need-pyproject)
+
+## System
+
+[C4 PlantUML](https://medium.com/@erickzanetti/understanding-the-c4-model-a-practical-guide-with-plantuml-examples-76cfdcbe0e01)

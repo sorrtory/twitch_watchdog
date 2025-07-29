@@ -8,5 +8,7 @@
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "plantuml.diagramsRoot": "docs/diagrams/src",
+  "plantuml.exportOutDir": "docs/diagrams/out"
 }

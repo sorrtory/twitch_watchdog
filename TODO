@@ -1,0 +1,6 @@
+- Create a Sequence Diagram . DONE
+- Create C4 (few) . DONE
+
+ Add celery+flower and redis
+
+- Websocket + pub/sub redis = update state
