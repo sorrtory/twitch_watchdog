@@ -34,7 +34,7 @@ app.add_middleware(
 
 
 if __name__ == "__main__":
-    uvicorn.run("watchdog.__main__:app", host="0.0.0.0", port=8000)
+    uvicorn.run("watchdog.fastapi:app", host="0.0.0.0", port=8000)
 
 # main()
 
