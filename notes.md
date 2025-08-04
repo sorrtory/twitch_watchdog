@@ -46,6 +46,10 @@ Set up bot
 
 [Celery tutorial](https://lip17.medium.com/hands-on-learn-python-celery-in-30-minutes-9544aabb70b1)
 
+[FasrAPI+Celery](https://github.com/testdrivenio/fastapi-celery)
+
+[Pereodic tasks Celery](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html)
+
 ## System
 
 [C4 PlantUML](https://medium.com/@erickzanetti/understanding-the-c4-model-a-practical-guide-with-plantuml-examples-76cfdcbe0e01)
