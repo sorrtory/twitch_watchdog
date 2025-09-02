@@ -1,6 +1,9 @@
 # Use poetry next time
 # https://devsjc.github.io/blog/20240627-the-complete-guide-to-pyproject-toml/#background-why-do-we-need-pyproject
 
+# Don't use only the pyproject.toml then
+# https://til.simonwillison.net/python/pyproject
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

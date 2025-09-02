@@ -42,9 +42,13 @@ Pylint - linter (try ruff next time) \
 pre-commit to launch them locally \
 github actions to launch them in the cloud
 
+> with zsh you need to use `noglob`
+
 ```bash
-pip install .
-pip install -e .[dev]
+pip install .               # For production
+pip install -e .[dev]       # For development
+pip install -e .[test]      # For testing
+
 pre-commit run --all-files # Formatter + Linter
 pre-commit install --install-hooks # Add .git/hooks
 
