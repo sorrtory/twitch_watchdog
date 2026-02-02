@@ -1,6 +1,10 @@
 - Create a Sequence Diagram . DONE
 - Create C4 (few) . DONE
 
+- try storybook
+- add jest to react
+- add playwright
+
 
 PROBLEM: How to manage watch dog service? (start / stop from api)
 - supervisord XML-RPC
