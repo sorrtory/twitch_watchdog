@@ -17,7 +17,7 @@ One python process (watchdog) can be not only for one streamer.
 Add celery+flower and redis
 
 ONE Dockerfile for
-- fastapi 
+- fastapi
 - celery
 
 Compose for
@@ -26,7 +26,7 @@ Compose for
 - celery
 - flower
 - redis
-- 
+-
 
 
 

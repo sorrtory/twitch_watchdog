@@ -2,12 +2,13 @@
 # which will be used to send messages to VK group and check Twitch stream status
 # for now
 
+import time
+
 from fastapi import APIRouter
 
 from watchdog.config import settings
 from watchdog.core.twitch import TwitchWatchDog
 from watchdog.core.vk import VKBotConversation
-import time
 
 router = APIRouter()
 
@@ -21,6 +22,7 @@ async def get_stream_status():
         "title": await watchdog.get_description(),
         "last_check": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),
     }
+
 
 @router.post("/watching/", tags=["twitch"])
 async def print_post_payload(payload: dict):
@@ -40,10 +42,12 @@ async def send_message():
         conv = VKBotConversation(settings.vk_token, settings.vk_group_id, peer_id)
         conv.send_message("Hello from WatchDog!")
 
+
 @router.post("/change_message/", tags=["vk"])
 async def change_message():
     """Change the message sent to a VK group."""
     # settings TODO
+
 
 @router.get("/get_chats/", tags=["vk"])
 async def get_chats():
