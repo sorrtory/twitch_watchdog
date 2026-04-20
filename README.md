@@ -3,7 +3,7 @@
 Simple app that checks if the streamer is live on Twitch and notifies the VK chat if so
 
 > Curruntly in a POC phase. Probes twitch -> send a VK message + has a UI for that.
-> Looking forward to implement celery workers and impove UI that app become a social media management kind of tool and stuff 
+> Looking forward to implement celery workers and impove UI that app become a social media management kind of tool and stuff
 
 ## Description
 
