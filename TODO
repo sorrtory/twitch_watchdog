@@ -1,0 +1,33 @@
+- Create a Sequence Diagram . DONE
+- Create C4 (few) . DONE
+
+- try storybook
+- add jest to react
+- add playwright
+
+
+PROBLEM: How to manage watch dog service? (start / stop from api)
+- supervisord XML-RPC
+- sub on redis + celery
+- k8s (k3s, minukube, kind)
+
+One python process (watchdog) can be not only for one streamer.
+
+
+Add celery+flower and redis
+
+ONE Dockerfile for
+- fastapi 
+- celery
+
+Compose for
+- mongo
+- fastapi
+- celery
+- flower
+- redis
+- 
+
+
+
+- Websocket + pub/sub redis = update state

@@ -1,0 +1,25 @@
+@startuml Add_streamer_to_watch_dog
+
+actor User
+participant Frontend
+participant Api
+database Database
+queue TaskQueue
+participant MessageBroker
+participant WatchDogService
+collections SocialMediaPlatforms
+entity Twitch
+
+User -> Frontend : Add streamer to watch dog
+Frontend -> Api : Send request to add streamer
+Api <-> Database : Check if streamer's already monitored \n and remember their platforms and tokens
+Api -> TaskQueue : Launch task to add streamer
+TaskQueue -> WatchDogService : Start monitoring streamer
+WatchDogService -> Twitch : Check if streamer is live
+WatchDogService -> Database : Get followers
+WatchDogService -> SocialMediaPlatforms : Notify followers about new stream
+WatchDogService -> MessageBroker : Publish stream status update
+MessageBroker -> Api : Receive stream status update from subscription
+Api -> Frontend : Update UI with new stream status
+
+@enduml

@@ -1,6 +1,21 @@
 {
     "configurations": [
         {
+            "name": "Launch via NPM",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/frontend/",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        
+        {
             "name": "Python Debugger: FastAPI",
             "type": "debugpy",
             "request": "launch",
@@ -30,5 +45,6 @@
             "module": "watchdog",
             "cwd": "${workspaceFolder}/src"
         },
+
     ]
 }

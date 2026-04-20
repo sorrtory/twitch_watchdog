@@ -1,0 +1,69 @@
+@startuml Streamer_WatchDog_Architecture
+' PlantUML C4 Model. See https://github.com/plantuml-stdlib/C4-PlantUML
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Icons. Check https://github.com/tupadr3/plantuml-icon-font-sprites
+!$ICONURL = "https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v3.0.0/icons"
+!include $ICONURL/common.puml
+
+!include $ICONURL/devicons/mongodb.puml
+!include $ICONURL/devicons/react.puml
+!include $ICONURL/devicons/redis.puml
+!include $ICONURL/devicons/python.puml
+!include $ICONURL/devicons2/fastapi.puml
+!include $ICONURL/font-awesome-5/users.puml
+!include $ICONURL/font-awesome/twitch.puml
+!include $ICONURL/font-awesome/vk.puml
+!include $ICONURL/font-awesome/telegram.puml
+
+Person(streamer, "Streamer", "A person who starts a live stream")
+Person(fans, "Followers", "People who want to be notified about streams", $sprite="users")
+
+System_Boundary(watchDog, "WatchDog") {
+    Container(frontend, "Frontend", "React", "User interface for the WatchDog service", $sprite="react")
+    Container(watchDog_service, "WatchDog Service", "Python", "Watch for stream events and notify the users", $sprite="python")
+    Container(server, "API Server", "FastAPI", "Serve frontend and API", $sprite="fastapi")
+    Container(task_queue, "Task queue", "Celery", "Run watchdog workers", $sprite="python")
+    Container(msg_broker, "Message broker", "Redis", "Handles background tasks and message brokering", $sprite="redis")
+    ContainerDb(database, "Database", "MongoDB", "Stores user auth data, SNS tokens, chat IDs and preferred publishing information", $sprite="mongodb")
+}
+
+System_Ext(twitch, "Twitch", "External streaming platform", $sprite="twitch")
+
+System_Boundary(social_media, "Social Media Platforms") {
+    ' Followers should add bots to their chats
+    ' Streamer should add bot to channel or give permission to access channel
+
+    System_Ext(vk, "VK", "Chats", $sprite="vk")
+    System_Ext(telegram, "Telegram", "Public channel", $sprite="telegram")
+    ' Add discord or other platforms ...
+}
+
+' Streamer
+Rel(streamer, frontend, "Set up notification messages")
+Rel(streamer, twitch, "Starts a stream")
+
+' Followers
+Rel(fans, social_media, "Add WatchDog bot to their chats")
+Rel(fans, frontend, "Subscribe to notifications")
+
+' Frontend
+BiRel(frontend, server, "Call API endpoints", "HTTP")
+
+' Server
+BiRel(server, frontend, "Serve frontend", "HTTP")
+Rel(server, task_queue, "Update streamer monitoring", "Locally")
+BiRel(server, database, "Store and retrieve user data", "Locally")
+Rel(server, msg_broker, "Subscribe to stream status updates (for broadcast)", "Locally")
+Rel(server, frontend, "Broadcast streamer info", "WebSocket")
+
+' Celery
+BiRel(task_queue, msg_broker, "Update workers state", "Locally")
+Rel(task_queue, watchDog_service, "Start/Stop WatchDog service", "Locally")
+
+' WatchDog Service
+Rel(watchDog_service, twitch, "Check if stream is live", "HTML scraping")
+Rel(watchDog_service, social_media, "Send notifications to followers", "API calls")
+Rel(watchDog_service, msg_broker, "Update stream status", "Locally")
+
+@enduml
