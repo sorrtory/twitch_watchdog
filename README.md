@@ -1,4 +1,4 @@
-# Bro's streaming
+# Twitch Watchdog
 
 Simple app that checks if the streamer is live on Twitch and notifies the VK chat if so
 
