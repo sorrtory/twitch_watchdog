@@ -43,7 +43,7 @@ const Home: React.FC = () => {
       }, 5000);
       return () => clearInterval(intervalId);
     }
-    
+
   };
   return (
     <section className="container flex flex-wrap items-center justify-center gap-3">

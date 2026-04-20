@@ -81,7 +81,7 @@ def test_get_chat_info2():
     assert "title" in chat_info
     assert "members_count" in chat_info
     assert "photo" in chat_info
-    
+
 
 @pytest.mark.anyio
 async def test_get_chats():
